@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ -d $1 ]
+then 
+	sudo chmod -R $2 $1
+	if [ $? != 0 ]
+	then
+		echo "Operation not permitted or Permission bit is not set right"
+	else
+		echo "New Permissions Set"		
+		ls -al $1
+	fi
+else
+	echo "Directory is not present"
+fi
