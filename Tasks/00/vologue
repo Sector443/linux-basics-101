@@ -1,14 +1,28 @@
 #!/bin/bash
-if [ -d $1 ]
-then 
-	sudo chmod -R $2 $1
-	if [ $? != 0 ]
-	then
-		echo "Operation not permitted or Permission bit is not set right"
-	else
-		echo "New Permissions Set"		
-		ls -al $1
-	fi
-else
-	echo "Directory is not present"
-fi
+echo "Enter File/Directory name :"
+read pat
+echo "Enter the permisions you wanna set (read,readwrite, readwriteexecute):"
+read perm 
+case "$perm" in
+"read")
+	chmod -R a+r-wx $pat
+	;;&
+"readwrite")
+	chmod -R a+rw-x $pat
+	;;&
+"readwriteexecute")
+	chmod -R a+rwx $pat
+	;;&
+"write")
+	chmod -R a+w-rx $pat
+	;;&
+"readexecute")
+	chmod -R a+rx-w $pat
+	;;&
+"writeexecute")
+	chmod -R a+wx-r $pat
+	;;&
+"execute")
+	chmod -R a+wx-r $pat
+esac
+ls -l $pat
